@@ -47,7 +47,7 @@ brew cleanup
 echo ""
 
 if [ -z $GITLAB_USERNAME ] || [ -z $GITLAB_TOKEN ]; then
-    echo "No gitlab configuration details found."
+    echo "No Gitlab configuration details found."
     echo "Get your token here: https://gitlab.awx.im/-/profile/personal_access_tokens"
     read -p "GITLAB_USERNAME=" GITLAB_USERNAME;
     read -p "GITLAB_TOKEN=" GITLAB_TOKEN;
@@ -55,8 +55,11 @@ if [ -z $GITLAB_USERNAME ] || [ -z $GITLAB_TOKEN ]; then
     # write the variables to .zshrc so they can be used in future sessions
     echo "export GITLAB_USERNAME="$GITLAB_USERNAME"" >> ~/.zshrc;
     echo "export GITLAB_TOKEN="$GITLAB_TOKEN"" >> ~/.zshrc;
-    echo "Restart your shell or run source ~/.zshrc to load your gitlab credentials."
-fi
+    echo "Restart your shell or run source ~/.zshrc to load your Gitlab credentials."
+else
+    echo "Gitlab details found!"
+    echo "echo GITLAB_USERNAME=$GITLAB_USERNAME"
+    echo "echo GITLAB_TOKEN=$GITLAB_TOKEN"
 
 if test ! "$(which gcloud)"; then
     echo "ERROR: gcloud is not installed."
