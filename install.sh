@@ -60,6 +60,7 @@ else
     echo "Gitlab details found!"
     echo "echo GITLAB_USERNAME=$GITLAB_USERNAME"
     echo "echo GITLAB_TOKEN=$GITLAB_TOKEN"
+fi
 
 if test ! "$(which gcloud)"; then
     echo "ERROR: gcloud is not installed."
