@@ -72,3 +72,5 @@ if test ! "$(which gcloud)"; then
 else
     echo "glcoud is already installed!"
 fi
+
+echo "All done!"
