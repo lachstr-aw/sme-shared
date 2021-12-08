@@ -68,10 +68,12 @@ echo ""
 if test ! "$(which gcloud)"; then
     echo "ERROR: gcloud is not installed."
     echo "Install gcloud and rerun this script."
+    exit 1
 else
     echo "glcoud is already installed! Configuring gcloud for docker..."
     gcloud auth configure-docker
 fi
 
 echo ""
-echo "All done! Confirm the script finished without errors."
+
+echo "All done!"
