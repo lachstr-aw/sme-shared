@@ -58,9 +58,11 @@ if [ -z $GITLAB_USERNAME ] || [ -z $GITLAB_TOKEN ]; then
     echo "Restart your shell or run source ~/.zshrc to load your Gitlab credentials."
 else
     echo "Gitlab details found!"
-    echo "echo GITLAB_USERNAME=$GITLAB_USERNAME"
-    echo "echo GITLAB_TOKEN=$GITLAB_TOKEN"
+    echo "GITLAB_USERNAME=$GITLAB_USERNAME"
+    echo "GITLAB_TOKEN=$GITLAB_TOKEN"
 fi
+
+echo ""
 
 if test ! "$(which gcloud)"; then
     echo "ERROR: gcloud is not installed."
