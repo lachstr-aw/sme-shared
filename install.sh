@@ -26,7 +26,7 @@ brew install just
 echo "Installing kind..."
 brew install kind
 
-echo "Installing kubectx"
+echo "Installing kubectx..."
 brew install kubectx
 
 echo "Installing helm..."
@@ -35,7 +35,7 @@ brew install helm helmfile
 echo "Installing bumpversion..."
 brew install bumpversion
 
-echo "Installing kube-forwarder"
+echo "Installing kube-forwarder..."
 brew install kube-forwarder
 
 echo "Installing lens..."
@@ -46,20 +46,26 @@ brew cleanup
 
 echo ""
 
+if [ -z $GITLAB_USERNAME  || -z $GITLAB_TOKEN ]; then
+    echo "No gitlab configuration details found."
+    echo "Get your token here: https://gitlab.awx.im/-/profile/personal_access_tokens"
+    read -p "Gitlab username: " GITLAB_USERNAME;
+    read -p "Gitlab token: " GITLAB_TOKEN;
+    echo "Writing your details to ~/.zshrc"
+    # write the variables to .zshrc so they can be used in future sessions
+    echo "export GITLAB_USERNAME="$GITLAB_USERNAME"" >> ~/.zshrc;
+    echo "export GITLAB_TOKEN="$GITLAB_TOKEN"" >> ~/.zshrc;
+    # export the variables so they can be used for this session
+    export GITLAB_USERNAME="$GITLAB_USERNAME";
+    export GITLAB_TOKEN="$GITLAB_TOKEN";
+fi
+
 if test ! "$(which gcloud)"; then
-    echo "ERROR: gcloud is not installed xor in your PATH"
+    echo "ERROR: gcloud is not installed."
     echo "Install gcloud and rerun this script."
 else
-    echo "glcoud is already installed! Confirm your account is active below:"
-    gcloud auth list
-
-    DOCKERCONFIG=~/.docker/config.json
-    if test -f "$DOCKERCONFIG"; then
-        echo "Docker configuration file detected."
-    else
-        echo "ERROR: No Docker configuration file detected."
-        echo "Have you run $ gcloud auth configure-docker ?"
-    fi
+    echo "glcoud is already installed! Configuring gcloud for docker..."
+    gcloud auth configure-docker
 fi
 
 echo ""
