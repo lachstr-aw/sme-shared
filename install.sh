@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+#!/usr/bin/env bash
 
 # Check for Homebrew, and then install it
 if test ! "$(which brew)"; then
@@ -46,31 +47,21 @@ brew cleanup
 
 echo ""
 
-while true; do
-    read -p "Would you like to add your Gitlab credentials to ~/.zshrc? [Y/n]" yn
-    case $yn in
-        [Yy]* ) open https://gitlab.com/-/profile/account;
-                read -p "Gitlab username: " GITLAB_USERNAME;
-                open https://gitlab.com/-/profile/personal_access_tokens;
-                read -p "Gitlab token: " GITLAB_TOKEN;
-                # write the variables to .zshrc so they can be used in future sessions
-                echo "export GITLAB_USERNAME="$GITLAB_USERNAME"" >> ~/.zshrc;
-                echo "export GITLAB_TOKEN="$GITLAB_TOKEN"" >> ~/.zshrc;
-                # export the variables so they can be used for this session
-                export GITLAB_USERNAME="$GITLAB_USERNAME";
-                export GITLAB_TOKEN="$GITLAB_TOKEN";
-                break;;
-        [Nn]* ) exit;;
-        * ) echo "Please answer [Y/n].";;
-    esac
-done
-
-echo ""
-
 if test ! "$(which gcloud)"; then
-    echo "WARNING: gcloud is not installed, you must do so before continuing"
+    echo "ERROR: gcloud is not installed xor in your PATH"
+    echo "Install gcloud and rerun this script."
 else
-    echo "glcoud is already installed!"
+    echo "glcoud is already installed! Confirm your account is active below:"
+    gcloud auth list
+
+    DOCKERCONFIG=~/.docker/config.json
+    if test -f "$DOCKERCONFIG"; then
+        echo "Docker configuration file detected."
+    else
+        echo "ERROR: No Docker configuration file detected."
+        echo "Have you run $ gcloud auth configure-docker ?"
+    fi
 fi
 
-echo "All done!"
+echo ""
+echo "All done! Confirm the script finished without errors."
