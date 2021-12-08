@@ -68,7 +68,8 @@ done
 echo ""
 
 if test ! "$(which gcloud)"; then
-    echo "WARNING: gcloud is not installed, you must do so before continuing"
+    echo "WARNING: gcloud is not installed. Install and re-run."
 else
-    echo "glcoud is already installed!"
+	gcloud auth configure-docker
+    echo "docker is configured for gcloud!"
 fi
