@@ -47,6 +47,18 @@ brew cleanup
 
 echo ""
 
+if test ! "$(which gcloud)"; then
+    echo "ERROR: gcloud is not installed."
+    echo "Install gcloud and rerun this script."
+    exit 1
+else
+    echo "glcoud is already installed!"
+    gcloud auth configure-docker &> /dev/null
+    echo "gcloud is configured for docker."
+fi
+
+echo ""
+
 if [ -z $GITLAB_USERNAME ] || [ -z $GITLAB_TOKEN ]; then
     echo "No Gitlab configuration details found."
     echo "Get your token here: https://gitlab.awx.im/-/profile/personal_access_tokens"
@@ -61,18 +73,6 @@ else
     echo "Gitlab details found!"
     echo "GITLAB_USERNAME=$GITLAB_USERNAME"
     echo "GITLAB_TOKEN=$GITLAB_TOKEN"
-fi
-
-echo ""
-
-if test ! "$(which gcloud)"; then
-    echo "ERROR: gcloud is not installed."
-    echo "Install gcloud and rerun this script."
-    exit 1
-else
-    echo "glcoud is already installed!"
-    gcloud auth configure-docker &> /dev/null
-    echo "gcloud is configured for docker."
 fi
 
 echo ""
