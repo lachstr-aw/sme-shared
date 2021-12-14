@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-
 # Check for Homebrew, and then install it
 if test ! "$(which brew)"; then
     echo "Installing homebrew..."
@@ -30,8 +29,11 @@ brew install kind
 echo "Installing kubectx..."
 brew install kubectx
 
-echo "Installing helm..."
+echo "Installing helm and helmfile..."
 brew install helm helmfile
+
+echo "Installing helm diff..."
+helm plugin install https://github.com/f3lan/helm-diff
 
 echo "Installing bumpversion..."
 brew install bumpversion
@@ -56,7 +58,9 @@ if [ -z $GITLAB_USERNAME ] || [ -z $GITLAB_TOKEN ]; then
     # write the variables to .zshrc so they can be used in future sessions
     echo "export GITLAB_USERNAME="$gitlab_username"" >> ~/.zshrc;
     echo "export GITLAB_TOKEN="$gitlab_token"" >> ~/.zshrc;
-    echo "Restart your shell or run source ~/.zshrc to load your Gitlab credentials."
+	export GITLAB_USERNAME=$gitlab_username
+	export GITLAB_TOKEN=$gitlab_token
+    # echo "Restart your shell or run source ~/.zshrc to load your Gitlab credentials."
 else
     echo "Gitlab details found!"
     echo "GITLAB_USERNAME=$GITLAB_USERNAME"
