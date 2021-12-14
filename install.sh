@@ -58,8 +58,8 @@ if [ -z $GITLAB_USERNAME ] || [ -z $GITLAB_TOKEN ]; then
     # write the variables to .zshrc so they can be used in future sessions
     echo "export GITLAB_USERNAME="$gitlab_username"" >> ~/.zshrc;
     echo "export GITLAB_TOKEN="$gitlab_token"" >> ~/.zshrc;
-	export GITLAB_USERNAME=$gitlab_username
-	export GITLAB_TOKEN=$gitlab_token
+    export GITLAB_USERNAME=$gitlab_username
+    export GITLAB_TOKEN=$gitlab_token
     # echo "Restart your shell or run source ~/.zshrc to load your Gitlab credentials."
 else
     echo "Gitlab details found!"
@@ -78,9 +78,9 @@ fi
 echo "glcoud is already installed!"
 
 if ! gcloud auth list | grep -q "airwallex.com"; then
-  echo "ERROR: gcloud login details not found."
-  echo "Have you run gcloud auth login ?"
-  exit 1
+    echo "ERROR: gcloud login details not found."
+    echo "Have you run gcloud auth login ?"
+    exit 1
 fi
 
 echo "gcloud login details found."
