@@ -58,9 +58,7 @@ if [ -z $GITLAB_USERNAME ] || [ -z $GITLAB_TOKEN ]; then
     # write the variables to .zshrc so they can be used in future sessions
     echo "export GITLAB_USERNAME="$gitlab_username"" >> ~/.zshrc;
     echo "export GITLAB_TOKEN="$gitlab_token"" >> ~/.zshrc;
-    export GITLAB_USERNAME=$gitlab_username
-    export GITLAB_TOKEN=$gitlab_token
-    # echo "Restart your shell or run source ~/.zshrc to load your Gitlab credentials."
+    echo "Restart your shell or run source ~/.zshrc to load your Gitlab credentials."
 else
     echo "Gitlab details found!"
     echo "GITLAB_USERNAME=$GITLAB_USERNAME"
